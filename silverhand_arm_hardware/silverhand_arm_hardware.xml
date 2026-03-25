@@ -1,0 +1,8 @@
+<library path="silverhand_arm_hardware">
+  <class
+    name="silverhand_arm_hardware/SilverhandArmSystem"
+    type="silverhand_arm_hardware::SilverhandArmSystem"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>Cyphal-backed ros2_control system interface for the Silverhand arm.</description>
+  </class>
+</library>
