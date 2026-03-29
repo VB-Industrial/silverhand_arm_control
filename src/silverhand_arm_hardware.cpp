@@ -1,4 +1,4 @@
-#include "silverhand_arm_hardware/silverhand_arm_hardware.hpp"
+#include "silverhand_arm_control/silverhand_arm_hardware.hpp"
 
 #include <algorithm>
 #include <array>
@@ -16,7 +16,7 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "pluginlib/class_list_macros.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "silverhand_arm_hardware/joint_ports.hpp"
+#include "silverhand_arm_control/joint_ports.hpp"
 
 #include "cyphal/allocators/o1/o1_allocator.h"
 #include "cyphal/cyphal.h"
@@ -70,7 +70,7 @@ std::uint16_t get_uint16_param(
     return static_cast<std::uint16_t>(std::stoi(it->second));
   } catch (const std::exception &) {
     RCLCPP_WARN(
-      rclcpp::get_logger("silverhand_arm_hardware"),
+      rclcpp::get_logger("silverhand_arm_control"),
       "Failed to parse hardware parameter '%s', using default value %u",
       key.c_str(), default_value);
     return default_value;
@@ -91,7 +91,7 @@ std::size_t get_size_t_param(
     return static_cast<std::size_t>(std::stoul(it->second));
   } catch (const std::exception &) {
     RCLCPP_WARN(
-      rclcpp::get_logger("silverhand_arm_hardware"),
+      rclcpp::get_logger("silverhand_arm_control"),
       "Failed to parse hardware parameter '%s', using default value %zu",
       key.c_str(), default_value);
     return default_value;
@@ -100,7 +100,7 @@ std::size_t get_size_t_param(
 
 }  // namespace
 
-namespace silverhand_arm_hardware::detail
+namespace silverhand_arm_control::detail
 {
 
 class JointStateReader;
@@ -121,7 +121,7 @@ class JointStateReader : public AbstractSubscription<JointStateMsg>
 {
 public:
   JointStateReader(const InterfacePtr & interface, CyphalRuntime * runtime)
-  : AbstractSubscription<JointStateMsg>(interface, silverhand_arm_hardware::kAgentJointStatePort),
+  : AbstractSubscription<JointStateMsg>(interface, silverhand_arm_control::kAgentJointStatePort),
     runtime_(runtime)
   {
   }
@@ -135,7 +135,7 @@ public:
     }
 
     const auto remote_node_id = transfer->metadata.remote_node_id;
-    if (remote_node_id == 0 || remote_node_id > silverhand_arm_hardware::kJointCount) {
+    if (remote_node_id == 0 || remote_node_id > silverhand_arm_control::kJointCount) {
       return;
     }
 
@@ -148,9 +148,9 @@ private:
   CyphalRuntime * runtime_;
 };
 
-}  // namespace silverhand_arm_hardware::detail
+}  // namespace silverhand_arm_control::detail
 
-namespace silverhand_arm_hardware
+namespace silverhand_arm_control
 {
 
 SilverhandArmSystem::~SilverhandArmSystem() = default;
@@ -389,8 +389,8 @@ hardware_interface::return_type SilverhandArmSystem::write(
   return hardware_interface::return_type::OK;
 }
 
-}  // namespace silverhand_arm_hardware
+}  // namespace silverhand_arm_control
 
 PLUGINLIB_EXPORT_CLASS(
-  silverhand_arm_hardware::SilverhandArmSystem,
+  silverhand_arm_control::SilverhandArmSystem,
   hardware_interface::SystemInterface)

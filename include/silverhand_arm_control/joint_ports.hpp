@@ -1,10 +1,10 @@
-#ifndef SILVERHAND_ARM_HARDWARE__JOINT_PORTS_HPP_
-#define SILVERHAND_ARM_HARDWARE__JOINT_PORTS_HPP_
+#ifndef SILVERHAND_ARM_CONTROL__JOINT_PORTS_HPP_
+#define SILVERHAND_ARM_CONTROL__JOINT_PORTS_HPP_
 
 #include <array>
 #include <cstdint>
 
-namespace silverhand_arm_hardware
+namespace silverhand_arm_control
 {
 
 constexpr std::size_t kJointCount = 6;
@@ -19,6 +19,6 @@ constexpr std::array<std::uint16_t, kJointCount> kJointCommandPorts = {
   1126,
 };
 
-}  // namespace silverhand_arm_hardware
+}  // namespace silverhand_arm_control
 
-#endif  // SILVERHAND_ARM_HARDWARE__JOINT_PORTS_HPP_
+#endif  // SILVERHAND_ARM_CONTROL__JOINT_PORTS_HPP_

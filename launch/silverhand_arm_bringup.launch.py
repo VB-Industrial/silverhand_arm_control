@@ -11,10 +11,10 @@ def generate_launch_description():
     node_id = LaunchConfiguration("node_id")
 
     description_file = PathJoinSubstitution(
-        [FindPackageShare("silverhand_arm_description"), "urdf", "silverhand.urdf.xacro"]
+        [FindPackageShare("silverhand_arm_control"), "urdf", "silverhand.urdf.xacro"]
     )
     controllers_file = PathJoinSubstitution(
-        [FindPackageShare("silverhand_arm_bringup"), "config", "controllers.yaml"]
+        [FindPackageShare("silverhand_arm_control"), "config", "controllers.yaml"]
     )
 
     robot_description_content = Command(

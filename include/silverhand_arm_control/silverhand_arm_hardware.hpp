@@ -1,5 +1,5 @@
-#ifndef SILVERHAND_ARM_HARDWARE__SILVERHAND_ARM_HARDWARE_HPP_
-#define SILVERHAND_ARM_HARDWARE__SILVERHAND_ARM_HARDWARE_HPP_
+#ifndef SILVERHAND_ARM_CONTROL__SILVERHAND_ARM_HARDWARE_HPP_
+#define SILVERHAND_ARM_CONTROL__SILVERHAND_ARM_HARDWARE_HPP_
 
 #include <cstdint>
 #include <memory>
@@ -12,9 +12,9 @@
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
-#include "silverhand_arm_hardware/visibility_control.h"
+#include "silverhand_arm_control/visibility_control.h"
 
-namespace silverhand_arm_hardware
+namespace silverhand_arm_control
 {
 
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -24,7 +24,7 @@ namespace detail
 struct CyphalRuntime;
 }  // namespace detail
 
-class SILVERHAND_ARM_HARDWARE_PUBLIC SilverhandArmSystem
+class SILVERHAND_ARM_CONTROL_PUBLIC SilverhandArmSystem
   : public hardware_interface::SystemInterface
 {
 public:
@@ -73,6 +73,6 @@ private:
   bool is_active_{false};
 };
 
-}  // namespace silverhand_arm_hardware
+}  // namespace silverhand_arm_control
 
-#endif  // SILVERHAND_ARM_HARDWARE__SILVERHAND_ARM_HARDWARE_HPP_
+#endif  // SILVERHAND_ARM_CONTROL__SILVERHAND_ARM_HARDWARE_HPP_

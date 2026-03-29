@@ -1,14 +1,19 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>silverhand_arm_bringup</name>
+  <name>silverhand_arm_control</name>
   <version>0.1.0</version>
-  <description>Bringup package for ros2_control-based Silverhand arm operation.</description>
+  <description>Unified ros2_control, hardware plugin, and bringup package for the Silverhand arm.</description>
 
   <maintainer email="todo@example.com">Silverhand Team</maintainer>
   <license>BSD-3-Clause</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
 
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
@@ -16,8 +21,8 @@
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>silverhand_arm_description</exec_depend>
-  <exec_depend>silverhand_arm_hardware</exec_depend>
+  <exec_depend>silverhand_arm_model</exec_depend>
+  <exec_depend>urdf</exec_depend>
   <exec_depend>xacro</exec_depend>
 
   <export>
