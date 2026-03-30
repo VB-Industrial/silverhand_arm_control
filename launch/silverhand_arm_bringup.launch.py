@@ -73,7 +73,7 @@ def generate_launch_description():
             ),
             DeclareLaunchArgument(
                 "can_iface",
-                default_value="can0",
+                default_value="vcan1.0",
                 description="Linux CAN interface used by the Cyphal transport.",
             ),
             DeclareLaunchArgument(

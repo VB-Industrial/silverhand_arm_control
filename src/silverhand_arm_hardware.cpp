@@ -39,7 +39,7 @@ void error_handler()
 std::uint64_t micros_64()
 {
   using namespace std::chrono;
-  return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+  return duration_cast<microseconds>(steady_clock::now().time_since_epoch()).count();
 }
 
 UtilityConfig g_utilities(micros_64, error_handler);
@@ -170,7 +170,7 @@ CallbackReturn SilverhandArmSystem::on_init(
     return CallbackReturn::ERROR;
   }
 
-  can_iface_ = get_string_param(info_, "can_iface", "can0");
+  can_iface_ = get_string_param(info_, "can_iface", "vcan1.0");
   node_id_ = get_uint16_param(info_, "node_id", 100);
   queue_len_ = get_size_t_param(info_, "queue_len", 1000);
 
@@ -376,7 +376,6 @@ hardware_interface::return_type SilverhandArmSystem::write(
       i,
       static_cast<float>(joint_position_command_[i]),
       static_cast<float>(joint_velocity_command_[i]));
-    spin_transport_once();
   }
 
   ++runtime_->heartbeat_counter;
@@ -386,6 +385,7 @@ hardware_interface::return_type SilverhandArmSystem::write(
   }
 
   spin_transport_once();
+
   return hardware_interface::return_type::OK;
 }
 

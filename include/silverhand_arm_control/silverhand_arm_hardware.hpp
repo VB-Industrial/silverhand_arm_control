@@ -67,7 +67,7 @@ private:
   std::vector<double> joint_position_state_;
   std::vector<double> joint_velocity_state_;
   std::unique_ptr<detail::CyphalRuntime> runtime_;
-  std::string can_iface_{"can0"};
+  std::string can_iface_{"vcan1.0"};
   std::uint16_t node_id_{100};
   std::size_t queue_len_{1000};
   bool is_active_{false};
