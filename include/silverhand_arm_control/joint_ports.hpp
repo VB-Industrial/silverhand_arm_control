@@ -8,6 +8,7 @@ namespace silverhand_arm_control
 {
 
 constexpr std::size_t kJointCount = 6;
+constexpr std::uint16_t kFirstArmJointNodeId = 21;
 constexpr std::uint16_t kAgentJointStatePort = 1001;
 
 constexpr std::array<std::uint16_t, kJointCount> kJointCommandPorts = {

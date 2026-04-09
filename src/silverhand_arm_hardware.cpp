@@ -135,11 +135,15 @@ public:
     }
 
     const auto remote_node_id = transfer->metadata.remote_node_id;
-    if (remote_node_id == 0 || remote_node_id > silverhand_arm_control::kJointCount) {
+    if (remote_node_id < silverhand_arm_control::kFirstArmJointNodeId ||
+      remote_node_id >=
+      (silverhand_arm_control::kFirstArmJointNodeId + silverhand_arm_control::kJointCount))
+    {
       return;
     }
 
-    const auto index = static_cast<std::size_t>(remote_node_id - 1);
+    const auto index = static_cast<std::size_t>(
+      remote_node_id - silverhand_arm_control::kFirstArmJointNodeId);
     runtime_->joint_position[index] = message.angular_position.radian;
     runtime_->joint_velocity[index] = message.angular_velocity.radian_per_second;
   }
