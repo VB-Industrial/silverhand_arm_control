@@ -143,9 +143,9 @@ cd /home/r/silver_ws/src/silverhand_arm_control
 
 ## systemd
 
-В репозитории лежит user-service template:
+System service template:
 
-- `systemd/user/silverhand-arm-control@.service`
+- `systemd/system/silverhand-arm-control@.service`
 
 Экземпляры:
 
@@ -155,36 +155,31 @@ cd /home/r/silver_ws/src/silverhand_arm_control
 Установка:
 
 ```bash
-mkdir -p ~/.config/systemd/user
-cp /home/r/silver_ws/src/silverhand_arm_control/systemd/user/silverhand-arm-control@.service ~/.config/systemd/user/
-systemctl --user daemon-reload
+sudo install -Dm644 /home/r/silver_ws/src/silverhand_arm_control/systemd/system/silverhand-arm-control@.service /etc/systemd/system/silverhand-arm-control@.service
+sudo systemctl daemon-reload
 ```
 
 Запуск:
 
 ```bash
-systemctl --user enable --now silverhand-arm-control@mock.service
+sudo systemctl enable --now silverhand-arm-control@mock.service
 ```
 
 или:
 
 ```bash
-systemctl --user enable --now silverhand-arm-control@real.service
+sudo systemctl enable --now silverhand-arm-control@real.service
 ```
 
-Автозапуск без логина:
-
-```bash
-loginctl enable-linger "$USER"
-```
+Автозапуск без логина не нужен: system service стартует без user session.
 
 Полезные команды:
 
 ```bash
-systemctl --user status silverhand-arm-control@mock.service
-journalctl --user -u silverhand-arm-control@mock.service -f
-systemctl --user restart silverhand-arm-control@mock.service
-systemctl --user disable --now silverhand-arm-control@mock.service
+systemctl status silverhand-arm-control@mock.service
+journalctl -u silverhand-arm-control@mock.service -f
+sudo systemctl restart silverhand-arm-control@mock.service
+sudo systemctl disable --now silverhand-arm-control@mock.service
 ```
 
 ## Parameters
